@@ -25,7 +25,8 @@ namespace Order.UnitTests.Domain
             _Order.CalculateTotal();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Criação do Pedido")]
+        [Trait("Layer", "Domain")]
         public void CreateOrder()
         {
             Assert.Equal(EntityStatusEnum.Active, _Order.Status);
@@ -52,7 +53,8 @@ namespace Order.UnitTests.Domain
             Assert.Equal(_Order.Total, (decimal)14000.00);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Alteração do Pedido")]
+        [Trait("Layer", "Domain")]
         public void UpdateOrder()
         {
             var newItems = new List<OrderItemModel>() {
@@ -70,7 +72,8 @@ namespace Order.UnitTests.Domain
             Assert.Equal(_Order.Total, (decimal)5000.00);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Exclusão do Pedido")]
+        [Trait("Layer", "Domain")]
         public void DeleteOrder()
         {
             _Order.Delete();
@@ -79,8 +82,9 @@ namespace Order.UnitTests.Domain
             Assert.NotNull(_Order.DateDeleteAt);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Calculo do Total")]
         [MemberData(nameof(DataItems))]
+        [Trait("Layer", "Domain")]
         public void CalculateTotal(List<OrderItemModel> items, decimal expected)
         {
             _Order.UpdateItems(items);

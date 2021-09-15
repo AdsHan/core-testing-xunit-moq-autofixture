@@ -15,7 +15,8 @@ namespace Order.UnitTests.Application.Queries
     public class OrderQueryHandlerTests
     {
 
-        [Fact]
+        [Fact(DisplayName = "Retorno Todos Pedidos")]
+        [Trait("Layer", "Application - Queries")]
         public async Task ThreeOrdersExist_Executed_ReturnThreeOrdersDTO()
         {
             // Arrange
@@ -53,7 +54,8 @@ namespace Order.UnitTests.Application.Queries
             Dto.Items.Count.ShouldBe(Dto.Items.Count);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Retorno do Pedido por ID")]
+        [Trait("Layer", "Application - Queries")]
         public async Task OrderExist_Executed_ReturnOrderById()
         {
             // Arrange

@@ -11,7 +11,8 @@ namespace Order.UnitTests.Application.Commands
 {
     public class OrderCommandHandlerTests
     {
-        [Fact]
+        [Fact(DisplayName = "Fluxo da Criação do Pedido")]
+        [Trait("Layer", "Application - Commands")]
         public async Task InputDataIsOk_Executed_CreateOrderReturningOrderdId()
         {
             // Arrange
@@ -29,7 +30,8 @@ namespace Order.UnitTests.Application.Commands
             repositoryMock.Verify(pr => pr.SaveAsync(), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Fluxo da Alteração do Pedido")]
+        [Trait("Layer", "Application - Commands")]
         public async Task InputDataIsOk_Executed_ChangeOrder()
         {
             // Arrange
@@ -40,7 +42,7 @@ namespace Order.UnitTests.Application.Commands
             updateOrder.Id = currentOrder.Id;
 
             var repositoryMock = new Mock<IOrderRepository>();
-            repositoryMock.Setup(pr => pr.GetByIdAsync(currentOrder.Id).Result).Returns(currentOrder);
+            repositoryMock.Setup(pr => pr.GetByIdAsync(It.IsAny<int>()).Result).Returns(currentOrder);
 
             var commandHandler = new OrderCommandHandler(repositoryMock.Object);
 
@@ -53,7 +55,8 @@ namespace Order.UnitTests.Application.Commands
             repositoryMock.Verify(pr => pr.SaveAsync(), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Fluxo da Exclusão do Pedido")]
+        [Trait("Layer", "Application - Commands")]
         public async Task InputDataIsOk_Executed_DeleteOrder()
         {
             // Arrange
@@ -64,7 +67,7 @@ namespace Order.UnitTests.Application.Commands
             deleteOrder.Id = currentOrder.Id;
 
             var repositoryMock = new Mock<IOrderRepository>();
-            repositoryMock.Setup(pr => pr.GetByIdAsync(currentOrder.Id).Result).Returns(currentOrder);
+            repositoryMock.Setup(pr => pr.GetByIdAsync(It.IsAny<int>()).Result).Returns(currentOrder);
 
             var commandHandler = new OrderCommandHandler(repositoryMock.Object);
 
@@ -77,7 +80,8 @@ namespace Order.UnitTests.Application.Commands
             repositoryMock.Verify(pr => pr.SaveAsync(), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Informado Usuário Inexistente")]
+        [Trait("Layer", "Application - Commands")]
         public async Task UserInvalid_Executed_ResultInvalid()
         {
             // Arrange
